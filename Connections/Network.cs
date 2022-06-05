@@ -21,6 +21,7 @@ namespace TestProject1
         public void connect(int startElement, int endElement)
         {
             checkRelationalRules(startElement, endElement);
+            checkIfConnectionAlreadyExist(startElement, endElement);
             Relationship relationship = new Relationship(startElement, endElement);
             RelationshipList.Add(relationship);
         }
@@ -50,6 +51,14 @@ namespace TestProject1
         {
             if (numberOfElements <= 1)
                 throw new Exception("Quantidade de elementos deve no minimo maior que um.");
+        }
+
+        private void checkIfConnectionAlreadyExist(int startElement, int endElement)
+        {
+            if (query(startElement, endElement))
+            {
+                throw new Exception("Já existe essa conexão.");
+            }
         }
 
         private void checkRelationalRules(int startElement, int endElement)

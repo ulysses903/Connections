@@ -66,9 +66,9 @@ namespace TestProject1
         [Fact]
         public void deve_lancar_exececao_se_inicial_for_negativo_ao_conectar()
         {
-            var teste = new Network(9);
+            var network = new Network(9);
 
-            Action act = () => teste.connect(-5, 3);
+            Action act = () => network.connect(-5, 3);
 
             Exception exception = Assert.Throws<Exception>(act);
             Assert.Equal("Elemento inicial deve ser positiva e menor que a quantidade de elementos.", exception.Message);
@@ -77,9 +77,9 @@ namespace TestProject1
         [Fact]
         public void deve_lancar_exececao_se_inicial_for_maior_que_a_quantidade_de_elementos_ao_conectar()
         {
-            var teste = new Network(9);
+            var network = new Network(9);
 
-            Action act = () => teste.connect(10, 11);
+            Action act = () => network.connect(10, 11);
 
             Exception exception = Assert.Throws<Exception>(act);
             Assert.Equal("Elemento inicial deve ser positiva e menor que a quantidade de elementos.", exception.Message);
@@ -88,9 +88,9 @@ namespace TestProject1
         [Fact]
         public void deve_lancar_exececao_se_final_for_negativo_ao_conectar()
         {
-            var teste = new Network(9);
+            var network = new Network(9);
 
-            Action act = () => teste.connect(3, -5);
+            Action act = () => network.connect(3, -5);
 
             Exception exception = Assert.Throws<Exception>(act);
             Assert.Equal("Elemento final deve ser positiva e menor que a quantidade de elementos.", exception.Message);
@@ -99,9 +99,9 @@ namespace TestProject1
         [Fact]
         public void deve_lancar_exececao_se_final_for_maior_que_a_quantidade_de_elementos_ao_conectar()
         {
-            var teste = new Network(9);
+            var network = new Network(9);
 
-            Action act = () => teste.connect(5, 11);
+            Action act = () => network.connect(5, 11);
 
             Exception exception = Assert.Throws<Exception>(act);
             Assert.Equal("Elemento final deve ser positiva e menor que a quantidade de elementos.", exception.Message);
@@ -110,9 +110,9 @@ namespace TestProject1
         [Fact]
         public void deve_lancar_exececao_se_inicial_for_negativo_ao_executar_query()
         {
-            var teste = new Network(9);
+            var network = new Network(9);
 
-            Action act = () => teste.query(-5, 3);
+            Action act = () => network.query(-5, 3);
 
             Exception exception = Assert.Throws<Exception>(act);
             Assert.Equal("Elemento inicial deve ser positiva e menor que a quantidade de elementos.", exception.Message);
@@ -121,9 +121,9 @@ namespace TestProject1
         [Fact]
         public void deve_lancar_exececao_se_inicial_for_maior_que_a_quantidade_de_elementos_ao_executar_query()
         {
-            var teste = new Network(9);
+            var network = new Network(9);
 
-            Action act = () => teste.query(10, 11);
+            Action act = () => network.query(10, 11);
 
             Exception exception = Assert.Throws<Exception>(act);
             Assert.Equal("Elemento inicial deve ser positiva e menor que a quantidade de elementos.", exception.Message);
@@ -132,9 +132,9 @@ namespace TestProject1
         [Fact]
         public void deve_lancar_exececao_se_final_for_negativo_ao_executar_query()
         {
-            var teste = new Network(9);
+            var network = new Network(9);
 
-            Action act = () => teste.query(3, -5);
+            Action act = () => network.query(3, -5);
 
             Exception exception = Assert.Throws<Exception>(act);
             Assert.Equal("Elemento final deve ser positiva e menor que a quantidade de elementos.", exception.Message);
@@ -143,12 +143,24 @@ namespace TestProject1
         [Fact]
         public void deve_lancar_exececao_se_final_for_maior_que_a_quantidade_de_elementos_ao_executar_query()
         {
-            var teste = new Network(9);
+            var network = new Network(9);
 
-            Action act = () => teste.query(5, 11);
+            Action act = () => network.query(5, 11);
 
             Exception exception = Assert.Throws<Exception>(act);
             Assert.Equal("Elemento final deve ser positiva e menor que a quantidade de elementos.", exception.Message);
+        }
+
+        [Fact]
+        public void deve_lancar_exececao_se_tentar_inserir_uma_conexão_que_ja_existe()
+        {
+            var network = new Network(9);
+            network.connect(5, 3);
+
+            Action act = () => network.connect(3, 5);
+
+            Exception exception = Assert.Throws<Exception>(act);
+            Assert.Equal("Já existe essa conexão.", exception.Message);
         }
     }
 }
